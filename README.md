@@ -193,13 +193,13 @@ Content-type: json
     }
   },
   "price_00": {
-    "value": 00,
+    "value": 12.34,
     "prefix": "$",
     "sufix": "MXN",
     "factor": 1
   },
   "price_01": {
-    "value": 00,
+    "value": 12.34,
     "prefix": "$",
     "sufix": "MXN",
     "factor": 1
