@@ -208,12 +208,12 @@ Content-type: json
     {
       "branch_id": 1,
       "branch_name": "Fresnillo, Zac",
-      "quantity": 2623
+      "quantity": 123
     },
     {
       "branch_id": 4,
       "branch_name": "Monterrey, NL",
-      "quantity": 41
+      "quantity": 123
     }
   ],
   "category": {
@@ -242,9 +242,9 @@ Content-type: json
   ],
   "interchanges": [
     {
-      "code": "CTK510056",
+      "code": "XYZ123456",
       "make": {
-        "value": "CARTEK"
+        "value": "ANOTHERSELLER"
       }
     }
   ]
