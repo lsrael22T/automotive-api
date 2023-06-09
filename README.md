@@ -17,13 +17,13 @@ Existen dos métodos de autenticación conocidos como `grant_type`:
 
 ## Obtener token de autorización (Login)
 El siguiente método sirve para obtener un token de inicio de sesión, dicho token es el que nos dará acceso a la API.
-##### URL:
+#### URL:
 https://sprautomotive.com/oauth/token
-##### Método:
+#### Método:
 POST
-##### Encabezados:
+#### Encabezados:
 **Accept:** application/json
-##### Body (form-data):
+#### Body (form-data):
 - **grant_type:** password
 - **client_id:** *id de credenciales tipo API*
 - **client_secret:** *llave de credenciales tipo API*
@@ -73,13 +73,13 @@ En caso de recibir algún error, la respuesta tendrá la siguiente estructura:
 
 ## Renovar token de autorización (Refresh token)
 El siguiente método sirve para evitar que nuestra sesión caduque. Cuando nuestro `access_token` esté a punto de expirar podemos usar este método para obtener un nuevo token de acceso sin necesidad de volver a introducir usuario y contraseña.
-##### URL:
+#### URL:
 https://sprautomotive.com/oauth/token
-##### Método:
+#### Método:
 POST
-##### Encabezados:
+#### Encabezados:
 **Accept:** application/json
-##### Body (form-data):
+#### Body (form-data):
 - **grant_type:** refresh_token
 - **client_id:** *id de credenciales tipo API*
 - **client_secret:** *llave de credenciales tipo API*
@@ -133,17 +133,17 @@ Lista de los recuros que actualmente se pueden consumir desde nuestra API. La si
 
 ### Producto
 Obtener información especifica de un producto conociendo su código.
-##### URL:
+#### URL:
 https://sprautomotive.com/{locale}/api/products/{code}
-##### Variables:
+#### Variables:
 - **locale:** Código ISO de la región del usuario autenticado
 - **code:** Código del producto a consultar
 
-##### Método:
+#### Método:
 GET
-##### Encabezados:
+#### Encabezados:
 **Accept:** application/json
-##### Solicitud
+#### Solicitud
 usando laravel php:
 ```php
 $response = Http::asForm()
@@ -154,7 +154,7 @@ $response = Http::asForm()
 
 return $response->json();
 ```
-##### Respuesta
+#### Respuesta
 Content-type: json
 ```json
 {
@@ -251,7 +251,7 @@ Content-type: json
 }
 ```
 
-##### Respuesta descriptiva
+#### Respuesta descriptiva
 - **code:**
     - **Tipo**: String
     - **Permisos:** *Ninguno*
