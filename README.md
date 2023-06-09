@@ -112,7 +112,7 @@ Si la solicitud es correcta recibiremos la siguiente respuesta:
 > NOTA: Una vez que recibimos nuevos `access_token` y `refresh_token`, los anteriores quedan completamente invalidados y ya no podrán usarse para autenticación.
 
 ## Consumir datos de la API
-Una vez que contamos con nuestro token de acceso ya podremos consumir la información de la API. Para ello toda solicitud web debe incluir los siguientes headers:
+Una vez que contamos con nuestro token de acceso ya podremos consumir la información de la API. Para ello, toda solicitud web debe incluir los siguientes headers:
 - **Accept:** application/json
 - **Authorization:** Bearer <access_token>
 
