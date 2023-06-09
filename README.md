@@ -56,10 +56,10 @@ Si la solicitud es correcta recibiremos la siguiente respuesta:
 }
 ```
 Los valores son los siguientes:
-- **token_type:** Especifica el tipo de token que hemos recuperado, en este caso siempre será de tipo `bearer`.
-- **expires_in:** Especifica la vigencia de nuestro token en segundos, normalmente son 43200 segundos (12 horas).
+- **token_type:** Especifíca el tipo de token que hemos recuperado, en este caso siempre será de tipo `bearer`.
+- **expires_in:** Especifíca la vigencia de nuestro token en segundos, normalmente son 43200 segundos (12 horas).
 - **access_token:** Este es el token que nos dará acceso a la API.
-- **refresh_token**: Este token nos sirve para obtener un nuevo token de acceso en caso de que nuestro token anterior esté apunto de expirar.
+- **refresh_token**: Este token nos sirve para obtener un nuevo token de acceso en caso de que nuestro token anterior esté a punto de expirar.
 
 En caso de recibir algún error, la respuesta tendrá la siguiente estructura:
 ```json
@@ -129,10 +129,10 @@ return $response->json();
 ```
 
 ## Recursos disponibles
-Lista de los recuros que actualmente se pueden consumir desde nuestra API. La siguiente lista se encuentra en construcción y próximamente habrá nuevos recuros.
+Lista de los recursos que actualmente se pueden consumir desde nuestra API. La siguiente lista se encuentra en construcción y próximamente habrá nuevos recursos.
 
 ### Producto
-Obtener información especifica de un producto conociendo su código.
+Obtener información especifíca de un producto conociendo su código.
 #### URL:
 https://sprautomotive.com/{locale}/api/products/{code}
 #### Variables:
@@ -316,7 +316,7 @@ Content-type: json
 - **interchanges:**
     - **Tipo**: Array
     - **Permisos:** *Lectura de conversiones de productos*
-    - **Descripción:** Lista conversiones / codigos alternos de productos 
+    - **Descripción:** Lista conversiones / códigos alternos de productos 
     - **Contenido por item:**
         - *code:* Código alterno
         - *make:* Datos del fabricante
