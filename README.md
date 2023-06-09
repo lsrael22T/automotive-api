@@ -13,7 +13,7 @@ Para poder consumir la API es necesario contar con dos tipos de credenciales:
 ## Métodos de autenticación
 Existen dos métodos de autenticación conocidos como `grant_type`:
 - **password**: lo utilizamos para iniciar sesión en el sistema con nuestras credenciales, tanto credenciales de tipo *API* como de tipo *usuario*.
-**refresh_token**: lo utilizamos para obtener un nuevo token de autenticación sin necesidad de especificar username y el password. Para este último es necesario contar con un token tipo `password` vigente.
+- **refresh_token**: lo utilizamos para obtener un nuevo token de autenticación sin necesidad de especificar username y el password. Para este último es necesario contar con un token tipo `password` vigente.
 
 ## Obtener token de autorización (Login)
 El siguiente método sirve para obtener un token de inicio de sesión, dicho token es el que nos dará acceso a la API.
@@ -56,7 +56,7 @@ Si la solicitud es correcta recibiremos la siguiente respuesta:
 }
 ```
 Los valores son los siguientes:
-- **token_type:** Especifíca el tipo de token que hemos recuperado, en este caso siempre será de tipo `bearer`.
+- **token_type:** Especifíca el tipo de token que hemos recuperado, en este caso siempre será de tipo `Bearer`.
 - **expires_in:** Especifíca la vigencia de nuestro token en segundos, normalmente son 43200 segundos (12 horas).
 - **access_token:** Este es el token que nos dará acceso a la API.
 - **refresh_token**: Este token nos sirve para obtener un nuevo token de acceso en caso de que nuestro token anterior esté a punto de expirar.
