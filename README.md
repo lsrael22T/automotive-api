@@ -149,6 +149,7 @@ usando laravel php:
 $response = Http::asForm()
 ->headers([
   'accept' => 'application/json',
+  'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...'
 ])
 ->get('https://sprautomotive.com/es_MX/api/products/DE-814');
 
@@ -326,9 +327,11 @@ return $response->json();
 ## Inventario
 Obtener información en tiempo real de inventario
 ### URL:
-https://sprautomotive.com/{locale}/api/inventory
+https://sprautomotive.com/{locale}/api/inventory?page=1
 ### Variables:
 - **locale:** Código ISO de la región del usuario autenticado
+## Parámetros de URL
+- **page:** Página de registros que se desea consultar. Si no se especifica, el valor predeterminado es 1
 
 ### Método:
 GET
@@ -340,8 +343,9 @@ usando laravel php:
 $response = Http::asForm()
 ->headers([
   'accept' => 'application/json',
+  'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...'
 ])
-->get('https://sprautomotive.com/es_MX/api/inventory');
+->get('https://sprautomotive.com/es_GT/api/inventory?page=2');
 
 return $response->json();
 ```
@@ -399,7 +403,7 @@ return $response->json();
 
 ```json
 {
-  "current_page": 1,
+  "current_page": 2,
   "data": [
     {
       "NOMBRECINTO": "ZZ1 - Zona Franca Parque Industrial Zeta La Union, S.A.",
@@ -423,12 +427,13 @@ return $response->json();
       "OBSBODEGA": "BOMBA DE CLUTCH FORD ESCORT L4 1.9 91-96/MAZDA PROTEGE 90-95",
       "FECHAABANDONO": "C20",
       "ESTATUS": "C21"
-    }
+    },
+    ...{}
   ],
-  "from": 1,
+  "from": 101,
   "last_page": 14,
   "per_page": 100,
-  "to": 100,
+  "to": 200,
   "total": 1341
 }
   
