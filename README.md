@@ -330,7 +330,7 @@ Obtener información en tiempo real de inventario
 https://sprautomotive.com/{locale}/api/inventory?page=1
 ### Variables:
 - **locale:** Código ISO de la región del usuario autenticado
-## Parámetros de URL
+### Parámetros de URL
 - **page:** Página de registros que se desea consultar. Si no se especifica, el valor predeterminado es 1
 
 ### Método:
