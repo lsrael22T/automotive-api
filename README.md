@@ -143,6 +143,7 @@ https://sprautomotive.com/{locale}/api/products/{code}
 GET
 ### Encabezados:
 **Accept:** application/json
+**Authorization:** token de autenticación
 ### Solicitud
 usando laravel php:
 ```php
@@ -337,6 +338,7 @@ https://sprautomotive.com/{locale}/api/inventory?page=1
 GET
 ### Encabezados:
 **Accept:** application/json
+**Authorization:** token de autenticación
 ### Solicitud
 usando laravel php:
 ```php
