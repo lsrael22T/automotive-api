@@ -328,11 +328,12 @@ return $response->json();
 ## Inventario
 Obtener información en tiempo real de inventario
 ### URL:
-https://sprautomotive.com/{locale}/api/inventory?page=1
+https://sprautomotive.com/{locale}/api/inventory?page=1&enterprise=rodatech
 ### Variables:
 - **locale:** Código ISO de la región del usuario autenticado
 ### Parámetros de URL
 - **page:** Página de registros que se desea consultar. Si no se especifica, el valor predeterminado es 1
+- **enterprise:** Empresa que se desea consultar. Si no se especifica, el valor predeterminado es `rodatech`, otros valores: `partech`, `shark`
 
 ### Método:
 GET
@@ -347,7 +348,7 @@ $response = Http::asForm()
   'accept' => 'application/json',
   'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...'
 ])
-->get('https://sprautomotive.com/es_GT/api/inventory?page=2');
+->get('https://sprautomotive.com/es_GT/api/inventory?page=2&enterprise=rodatech');
 
 return $response->json();
 ```
