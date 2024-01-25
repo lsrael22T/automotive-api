@@ -3,8 +3,8 @@
 ## Introducción
 SPR automotive proporciona una API tipo Rest con autenticación a través de tokens. Nuestra API permite consultar productos de nuestra base de datos con toda la información necesaria de acuerdo al nivel de acceso.
 
-## Primeros pasos
-Para poder consumir la API es necesario contar con dos tipos de credenciales:
+## Credenciales necesarias
+Para consumir la API es necesario contar con dos tipos de credenciales:
 - **Credenciales de API:** Estas credenciales son exclusivas para cada empresa / aplicación. Dichas credenciales son proporcionadas por SPR Automotive y constan de un `client_id` y una llave `client_secret`.
 - **Credenciales de usuario web:** Estas credenciales sirven para identificar al usuario web que está haciendo uso de la API y constan de un `username` y un `password`. Dichas credenciales son las mismas que se le proporcionan a los usuarios finales de [sprautomotive.com](https://sprautomotive.com)
 
@@ -17,13 +17,13 @@ Existen dos métodos de autenticación conocidos como `grant_type`:
 
 ## Obtener token de autorización (Login)
 El siguiente método sirve para obtener un token de inicio de sesión, dicho token es el que nos dará acceso a la API.
-#### URL:
+### URL:
 https://sprautomotive.com/oauth/token
-#### Método:
+### Método:
 POST
-#### Encabezados:
+### Encabezados:
 **Accept:** application/json
-#### Body (form-data):
+### Body (form-data):
 - **grant_type:** password
 - **client_id:** *id de credenciales tipo API*
 - **client_secret:** *llave de credenciales tipo API*
@@ -73,13 +73,13 @@ En caso de recibir algún error, la respuesta tendrá la siguiente estructura:
 
 ## Renovar token de autorización (Refresh token)
 El siguiente método sirve para evitar que nuestra sesión caduque. Cuando nuestro `access_token` esté a punto de expirar podemos usar este método para obtener un nuevo token de acceso sin necesidad de volver a introducir usuario y contraseña.
-#### URL:
+### URL:
 https://sprautomotive.com/oauth/token
-#### Método:
+### Método:
 POST
-#### Encabezados:
+### Encabezados:
 **Accept:** application/json
-#### Body (form-data):
+### Body (form-data):
 - **grant_type:** refresh_token
 - **client_id:** *id de credenciales tipo API*
 - **client_secret:** *llave de credenciales tipo API*
@@ -128,22 +128,22 @@ $response = Http::asForm()
 return $response->json();
 ```
 
-## Recursos disponibles
+# Recursos disponibles
 Lista de los recursos que actualmente se pueden consumir desde nuestra API. La siguiente lista se encuentra en construcción y próximamente habrá nuevos recursos.
 
-### Producto
+## Producto
 Obtener información especifíca de un producto conociendo su código.
-#### URL:
+### URL:
 https://sprautomotive.com/{locale}/api/products/{code}
-#### Variables:
+### Variables:
 - **locale:** Código ISO de la región del usuario autenticado
 - **code:** Código del producto a consultar
 
-#### Método:
+### Método:
 GET
-#### Encabezados:
+### Encabezados:
 **Accept:** application/json
-#### Solicitud
+### Solicitud
 usando laravel php:
 ```php
 $response = Http::asForm()
@@ -154,8 +154,77 @@ $response = Http::asForm()
 
 return $response->json();
 ```
-#### Respuesta
-Content-type: json
+### respuesta
+- **code:**
+    - **Tipo**: String
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Código del producto
+- **applications:**
+    - **Tipo**: Object
+    - **Permisos:** *Lectura de aplicaciones*
+    - **Descripción:** Lista de compatibilidad de vehículos con estructura de árbol
+- **price_00:**
+    - **Tipo**: Object
+    - **Permisos:** *Lectura de precios, cuenta de telemarketing*
+    - **Descripción:** Precio del producto de lista (precio base)
+    - **Contenido:**
+        - *value:* precio del producto
+        - *prefix:* símbolo de moneda
+        - *sufix:* código ISO de moneda
+        - *factor:* factor de conversión referente a la moneda local
+- **price_01:**
+    - **Tipo**: Object
+    - **Permisos:** *Lectura de precios*
+    - **Descripción:** Precio del producto para el cliente (usuario autenticado)
+    - **Contenido:**
+        - *value:* precio del producto
+        - *prefix:* símbolo de moneda
+        - *sufix:* código ISO de moneda
+        - *factor:* factor de conversión referente a la moneda local
+- **stock:**
+    - **Tipo**: Array
+    - **Permisos:** *Lectura de existencias, Sucursales habilitadas*
+    - **Descripción:** Lista de existencias del producto en diferentes sucursales
+    - **Contenido por item:**
+        - *branch_id:* Identificador de sucursal
+        - *branch_name:* Nombre de sucursal
+        - *quantity:* Cantidad de piezas disponibles
+- **category:**
+    - **Tipo**: Object
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Línea / categoría a la que pertenece el producto
+    - **Contenido:**
+        - *singular:* Nombre regiónal en singular 
+        - *plural:* Nombre regiónal en plural 
+        - *keywords:* Palabras clave para identificar la categoría
+        - *line:* Línea a la que pertenece el producto
+          - *name_short:* Identificador corto
+          - *name_long:* Identificador descriptivo
+          - *description:* Información de productos que contiene la línea
+- **props:**
+    - **Tipo**: Array
+    - **Permisos:** *Lectura de atributos de productos*
+    - **Descripción:** Lista de atributos con los que cuenta el producto
+    - **Contenido por item:**
+        - *name:* Nombre de del atributo
+        - *content:* Valor del atributo
+- **oems:**
+    - **Tipo**: Array
+    - **Permisos:** *Lectura de oems de productos*
+    - **Descripción:** Lista códigos de ensambladora 
+    - **Contenido por item:**
+        - *code:* Código OEM
+        - *make:* Datos del fabricante
+          - *value:* Nombre del fabricante
+- **interchanges:**
+    - **Tipo**: Array
+    - **Permisos:** *Lectura de conversiones de productos*
+    - **Descripción:** Lista conversiones / códigos alternos de productos 
+    - **Contenido por item:**
+        - *code:* Código alterno
+        - *make:* Datos del fabricante
+          - *value:* Nombre del fabricante
+
 ```json
 {
   "code": "RT-510056",
@@ -251,73 +320,3 @@ Content-type: json
 }
 ```
 
-#### Respuesta descriptiva
-- **code:**
-    - **Tipo**: String
-    - **Permisos:** *Ninguno*
-    - **Descripción:** Código del producto
-- **applications:**
-    - **Tipo**: Object
-    - **Permisos:** *Lectura de aplicaciones*
-    - **Descripción:** Lista de compatibilidad de vehículos con estructura de árbol
-- **price_00:**
-    - **Tipo**: Object
-    - **Permisos:** *Lectura de precios, cuenta de telemarketing*
-    - **Descripción:** Precio del producto de lista (precio base)
-    - **Contenido:**
-        - *value:* precio del producto
-        - *prefix:* símbolo de moneda
-        - *sufix:* código ISO de moneda
-        - *factor:* factor de conversión referente a la moneda local
-- **price_01:**
-    - **Tipo**: Object
-    - **Permisos:** *Lectura de precios*
-    - **Descripción:** Precio del producto para el cliente (usuario autenticado)
-    - **Contenido:**
-        - *value:* precio del producto
-        - *prefix:* símbolo de moneda
-        - *sufix:* código ISO de moneda
-        - *factor:* factor de conversión referente a la moneda local
-- **stock:**
-    - **Tipo**: Array
-    - **Permisos:** *Lectura de existencias, Sucursales habilitadas*
-    - **Descripción:** Lista de existencias del producto en diferentes sucursales
-    - **Contenido por item:**
-        - *branch_id:* Identificador de sucursal
-        - *branch_name:* Nombre de sucursal
-        - *quantity:* Cantidad de piezas disponibles
-- **category:**
-    - **Tipo**: Object
-    - **Permisos:** *Ninguno*
-    - **Descripción:** Línea / categoría a la que pertenece el producto
-    - **Contenido:**
-        - *singular:* Nombre regiónal en singular 
-        - *plural:* Nombre regiónal en plural 
-        - *keywords:* Palabras clave para identificar la categoría
-        - *line:* Línea a la que pertenece el producto
-          - *name_short:* Identificador corto
-          - *name_long:* Identificador descriptivo
-          - *description:* Información de productos que contiene la línea
-- **props:**
-    - **Tipo**: Array
-    - **Permisos:** *Lectura de atributos de productos*
-    - **Descripción:** Lista de atributos con los que cuenta el producto
-    - **Contenido por item:**
-        - *name:* Nombre de del atributo
-        - *content:* Valor del atributo
-- **oems:**
-    - **Tipo**: Array
-    - **Permisos:** *Lectura de oems de productos*
-    - **Descripción:** Lista códigos de ensambladora 
-    - **Contenido por item:**
-        - *code:* Código OEM
-        - *make:* Datos del fabricante
-          - *value:* Nombre del fabricante
-- **interchanges:**
-    - **Tipo**: Array
-    - **Permisos:** *Lectura de conversiones de productos*
-    - **Descripción:** Lista conversiones / códigos alternos de productos 
-    - **Contenido por item:**
-        - *code:* Código alterno
-        - *make:* Datos del fabricante
-          - *value:* Nombre del fabricante
