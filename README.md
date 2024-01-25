@@ -320,3 +320,116 @@ return $response->json();
 }
 ```
 
+
+
+
+## Inventario
+Obtener información en tiempo real de inventario
+### URL:
+https://sprautomotive.com/{locale}/api/inventory
+### Variables:
+- **locale:** Código ISO de la región del usuario autenticado
+
+### Método:
+GET
+### Encabezados:
+**Accept:** application/json
+### Solicitud
+usando laravel php:
+```php
+$response = Http::asForm()
+->headers([
+  'accept' => 'application/json',
+])
+->get('https://sprautomotive.com/es_MX/api/inventory');
+
+return $response->json();
+```
+### respuesta
+- **per_page:**
+    - **Tipo**: String
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Total de registros que se muestran por página, de forma predeterminada son 100
+- **current_page:**
+    - **Tipo**: String
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Página de consulta actual
+- **last_page:**
+    - **Tipo**: String
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Última página de consulta
+- **from:**
+    - **Tipo**: String
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Número de registro en el que comienza la lista de la página actual
+- **to:**
+    - **Tipo**: String
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Número de registro en el que termina la lista de la página actual
+- **total:**
+    - **Tipo**: String
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Número de registro en total
+- **data:**
+    - **Tipo**: Array
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Lista de registros,
+    - **Contenido por item:**
+      - **NOMBRECINTO**: Recinto Aduanero
+      - **CORRELATIVODUCAING**: No. Póliza (Ingreso)
+      - **NUMORDENDUCA**: No. DUA (Ingreso)
+      - **CONSIGNATARIO**: Consignatario
+      - **FECHAINGRECINTO**: Fecha de Arribo
+      - **PLACAS**: Placas
+      - **NUMCONTENEDOR**: No. Contenedor
+      - **CARTACUPO**: Carta de Cupo
+      - **DESCMERCAINGRESO**: Descripción de las Mercancías (Ingreso)
+      - **CANTBULTOSING**: Cantidad de Bultos (Ingreso)
+      - **NUMLOTEEGRESO**: No. Póliza (Egreso)
+      - **DUA**: No. DUA (Egreso)
+      - **DESCMERCAENGRESO**: Descripción de las Mercancías (Egreso)
+      - **BULTOSEGRESO**: Cantidad de Bultos (Egreso)
+      - **INVBULTOS**: Saldo en Inventario
+      - **NUMORDEN**: No. DUA
+      - **IMPUESTOS**: Impuestos (DAI - IVA)
+      - **UBICACIONBODEGA**: Ubicación de las Mercancías
+      - **OBSBODEGA**: Observaciones
+      - **FECHAABANDONO**: Fecha que Cae en Abandono
+      - **ESTATUS**: Estatus de las Mercancías
+
+```json
+{
+  "current_page": 1,
+  "data": [
+    {
+      "NOMBRECINTO": "ZZ1 - Zona Franca Parque Industrial Zeta La Union, S.A.",
+      "CORRELATIVODUCAING": "SAT-ZZ1-780-2023",
+      "NUMORDENDUCA": "",
+      "CONSIGNATARIO": "AH GUATEMALA, SOCIEDAD ANONIMA",
+      "FECHAINGRECINTO": "2023-10-31 00:00:00.000",
+      "PLACAS": "",
+      "NUMCONTENEDOR": "",
+      "CARTACUPO": "",
+      "DESCMERCAINGRESO": "111920 BOMBA DE CLUTCH",
+      "CANTBULTOSING": "6.0",
+      "NUMLOTEEGRESO": "327-1703359-0086-0780-23",
+      "DUA": "",
+      "DESCMERCAENGRESO": "111920 BOMBA DE CLUTCH",
+      "BULTOSEGRESO": "0.0",
+      "INVBULTOS": "6.0",
+      "NUMORDEN": "",
+      "IMPUESTOS": "5.7350399999999997",
+      "UBICACIONBODEGA": "33-36",
+      "OBSBODEGA": "BOMBA DE CLUTCH FORD ESCORT L4 1.9 91-96/MAZDA PROTEGE 90-95",
+      "FECHAABANDONO": "C20",
+      "ESTATUS": "C21"
+    }
+  ],
+  "from": 1,
+  "last_page": 14,
+  "per_page": 100,
+  "to": 100,
+  "total": 1341
+}
+  
+```
