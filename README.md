@@ -156,7 +156,7 @@ $response = Http::asForm()
 
 return $response->json();
 ```
-### respuesta
+### Respuesta
 - **code:**
     - **Tipo**: String
     - **Permisos:** *Ninguno*
@@ -358,7 +358,7 @@ $response = Http::asForm()
 
 return $response->json();
 ```
-### respuesta
+### Respuesta
 - **per_page:**
     - **Tipo**: Integer
     - **Permisos:** *Ninguno*
@@ -469,7 +469,7 @@ $response = Http::asForm()
 
 return $response->json();
 ```
-### respuesta
+### Respuesta
 - **per_page:**
     - **Tipo**: Integer
     - **Permisos:** *Ninguno*
@@ -579,7 +579,7 @@ $response = Http::asForm()
 
 return $response->json();
 ```
-### respuesta
+### Respuesta
 - **per_page:**
     - **Tipo**: Integer
     - **Permisos:** *Ninguno*
