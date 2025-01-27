@@ -326,7 +326,7 @@ return $response->json();
 }
 ```
 
-## CATÁLOGO DE PRODUCTOS
+## Catálogo de Productos
 Obtener lista de productos de acuerdo a los parámetros enviados.
 ### URL:
 https://sprautomotive.com/{locale}/api/products
@@ -440,7 +440,7 @@ return $response->json();
 }  
 ```
 
-## BÚSQUEDA DE PRODUCTOS GLOBAL
+## Búsqueda de productos
 Obtener lista de productos de acuerdo a los parámetros de búsuqeda
 ### URL:
 https://sprautomotive.com/{locale}/api/products
