@@ -142,8 +142,8 @@ https://sprautomotive.com/{locale}/api/products/{code}
 ### Método:
 GET
 ### Encabezados:
-**Accept:** application/json
-**Authorization:** token de autenticación
+- **Accept:** application/json
+- **Authorization:** token de autenticación
 ### Solicitud
 usando laravel php:
 ```php
@@ -161,6 +161,10 @@ return $response->json();
     - **Tipo**: String
     - **Permisos:** *Ninguno*
     - **Descripción:** Código del producto
+- **detailed_description:**
+    - **Tipo**: String
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Información más relevante del producto
 - **applications:**
     - **Tipo**: Object
     - **Permisos:** *Lectura de aplicaciones*
@@ -322,7 +326,230 @@ return $response->json();
 }
 ```
 
+## CATÁLOGO DE PRODUCTOS
+Obtener lista de productos de acuerdo a los parámetros enviados.
+### URL:
+https://sprautomotive.com/{locale}/api/products
+### Variables:
+- **locale:** Código ISO de la región del usuario autenticado
+### Parámetros de URL 
+#### Obligatorias
+- **year:** Año del vehículo
+- **make:** Marca del vehículo
+#### Opcionales
+- **model:** Modelo del vehículo
+- **category:** Línea de productos
+- **page:** No. de página a consultar. Aplica si la consulta contiene más de 30 productos
 
+### Método:
+GET
+### Encabezados:
+- **Accept:** application/json
+- **Authorization:** token de autenticación
+### Solicitud
+usando laravel php:
+```php
+$response = Http::asForm()
+->headers([
+  'accept' => 'application/json',
+  'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...'
+])
+->get('https://sprautomotive.com/api/products?year=2011&make=ford&model=fiesta&category=mazas+de+rueda');
+
+return $response->json();
+```
+### respuesta
+- **per_page:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Total de registros que se muestran por página, de forma predeterminada son 30
+- **current_page:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Página de consulta actual
+- **last_page:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Última página de consulta
+- **from:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Número de registro en el que comienza la lista de la página actual
+- **to:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Número de registro en el que termina la lista de la página actual
+- **total:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Número de registro en total
+- **data:**
+    - **Tipo**: Array
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Lista de productos que coinciden con los parámetros enviados,
+    - **Contenido por item:**
+      - Incluye la estructura de producto del [anteriormente](#producto), con la diferencia de que no incluye aplicaciones, equivalencias y propiedades de producto.
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "code": "RT-512490",
+            "detailed_description": "MAZA DE RUEDA TRAS. FWD ABS FORD FI",
+            "price_00": {
+                "value": 889.85,
+                "prefix": "$",
+                "sufix": "MXN",
+                "factor": 1
+            },
+            "price_01": {
+                "value": 889.85,
+                "prefix": "$",
+                "sufix": "MXN",
+                "factor": 1
+            },
+            "stock": [
+                {
+                    "branch_id": 1,
+                    "branch_name": "Fresnillo, Zac",
+                    "quantity": 165
+                },
+                {
+                    "branch_id": 2,
+                    "branch_name": "CDMX",
+                    "quantity": 18
+                }
+            ],
+            "category": {
+                "singular": "Maza de Rueda",
+                "plural": "Mazas de Rueda",
+                "line": {
+                    "name_short": "rodatech",
+                    "name_long": "Rodatech Automotive",
+                    "description": "Mazas, distribución y rodamientos"
+                }
+            }
+        }
+    ],
+    "from": 1,
+    "to": 1,
+    "last_page": 1,
+    "per_page": 30,
+    "total": 1
+}  
+```
+
+## BÚSQUEDA DE PRODUCTOS GLOBAL
+Obtener lista de productos de acuerdo a los parámetros de búsuqeda
+### URL:
+https://sprautomotive.com/{locale}/api/products
+### Variables:
+- **locale:** Código ISO de la región del usuario autenticado
+### Parámetros de URL 
+#### Obligatorias
+- **search:** Términos de búsqueda
+#### Opcionales
+- **page:** No. de página a consultar. Aplica si la consulta contiene más de 30 productos
+
+### Método:
+GET
+### Encabezados:
+- **Accept:** application/json
+- **Authorization:** token de autenticación
+### Solicitud
+usando laravel php:
+```php
+$response = Http::asForm()
+->headers([
+  'accept' => 'application/json',
+  'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...'
+])
+->get('https://sprautomotive.com/api/products?search=balatas+aveo');
+
+return $response->json();
+```
+### respuesta
+- **per_page:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Total de registros que se muestran por página, de forma predeterminada son 30
+- **current_page:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Página de consulta actual
+- **last_page:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Última página de consulta
+- **from:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Número de registro en el que comienza la lista de la página actual
+- **to:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Número de registro en el que termina la lista de la página actual
+- **total:**
+    - **Tipo**: Integer
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Número de registro en total
+- **data:**
+    - **Tipo**: Array
+    - **Permisos:** *Ninguno*
+    - **Descripción:** Lista de productos que coinciden con los parámetros enviados,
+    - **Contenido por item:**
+      - Incluye la estructura de producto vista [anteriormente](#producto), con la diferencia de que no incluye aplicaciones, equivalencias y propiedades de producto.
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "code": "PC1269K",
+            "detailed_description": "PASTILLAS DE FRENOS DEL. CHEVROLET",
+            "price_00": {
+                "value": 326.94,
+                "prefix": "$",
+                "sufix": "MXN",
+                "factor": 1
+            },
+            "price_01": {
+                "value": 326.94,
+                "prefix": "$",
+                "sufix": "MXN",
+                "factor": 1
+            },
+            "stock": [
+                {
+                    "branch_id": 1,
+                    "branch_name": "Fresnillo, Zac",
+                    "quantity": 43
+                },
+                {
+                    "branch_id": 2,
+                    "branch_name": "CDMX",
+                    "quantity": 3
+                }
+            ],
+            "category": {
+                "singular": "Pastillas de Frenos",
+                "plural": "Pastillas de Frenos",
+                "line": {
+                    "name_short": "partech",
+                    "name_long": "Partech",
+                    "description": "Autopartes hidráulicas y sistema de frenado"
+                }
+            }
+        }
+    ],
+    "from": 1,
+    "to": 4,
+    "last_page": 1,
+    "per_page": 30,
+    "total": 4
+}
+```
 
 
 ## Inventario (Solo GT)
@@ -338,8 +565,8 @@ https://sprautomotive.com/{locale}/api/inventory?page=1&enterprise=rodatech
 ### Método:
 GET
 ### Encabezados:
-**Accept:** application/json
-**Authorization:** token de autenticación
+- **Accept:** application/json
+- **Authorization:** token de autenticación
 ### Solicitud
 usando laravel php:
 ```php
@@ -354,27 +581,27 @@ return $response->json();
 ```
 ### respuesta
 - **per_page:**
-    - **Tipo**: String
+    - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Total de registros que se muestran por página, de forma predeterminada son 100
 - **current_page:**
-    - **Tipo**: String
+    - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Página de consulta actual
 - **last_page:**
-    - **Tipo**: String
+    - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Última página de consulta
 - **from:**
-    - **Tipo**: String
+    - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Número de registro en el que comienza la lista de la página actual
 - **to:**
-    - **Tipo**: String
+    - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Número de registro en el que termina la lista de la página actual
 - **total:**
-    - **Tipo**: String
+    - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Número de registro en total
 - **data:**
