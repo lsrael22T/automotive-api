@@ -552,7 +552,7 @@ return $response->json();
 ```
 
 
-## Inventario (Solo GT)
+## Inventario (Solo Guatemala)
 Obtener información en tiempo real de inventario
 ### URL:
 https://sprautomotive.com/{locale}/api/inventory?page=1&enterprise=rodatech
