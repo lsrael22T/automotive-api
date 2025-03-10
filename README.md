@@ -367,10 +367,6 @@ return $response->json();
     - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Página de consulta actual
-- **last_page:**
-    - **Tipo**: Integer
-    - **Permisos:** *Ninguno*
-    - **Descripción:** Última página de consulta
 - **from:**
     - **Tipo**: Integer
     - **Permisos:** *Ninguno*
@@ -379,10 +375,6 @@ return $response->json();
     - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Número de registro en el que termina la lista de la página actual
-- **total:**
-    - **Tipo**: Integer
-    - **Permisos:** *Ninguno*
-    - **Descripción:** Número de registro en total
 - **data:**
     - **Tipo**: Array
     - **Permisos:** *Ninguno*
@@ -434,9 +426,7 @@ return $response->json();
     ],
     "from": 1,
     "to": 1,
-    "last_page": 1,
-    "per_page": 30,
-    "total": 1
+    "per_page": 30
 }  
 ```
 
@@ -478,10 +468,6 @@ return $response->json();
     - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Página de consulta actual
-- **last_page:**
-    - **Tipo**: Integer
-    - **Permisos:** *Ninguno*
-    - **Descripción:** Última página de consulta
 - **from:**
     - **Tipo**: Integer
     - **Permisos:** *Ninguno*
@@ -490,10 +476,6 @@ return $response->json();
     - **Tipo**: Integer
     - **Permisos:** *Ninguno*
     - **Descripción:** Número de registro en el que termina la lista de la página actual
-- **total:**
-    - **Tipo**: Integer
-    - **Permisos:** *Ninguno*
-    - **Descripción:** Número de registro en total
 - **data:**
     - **Tipo**: Array
     - **Permisos:** *Ninguno*
@@ -545,9 +527,7 @@ return $response->json();
     ],
     "from": 1,
     "to": 4,
-    "last_page": 1,
-    "per_page": 30,
-    "total": 4
+    "per_page": 30
 }
 ```
 
