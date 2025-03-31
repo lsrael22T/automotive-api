@@ -165,10 +165,14 @@ return $response->json();
     - **Tipo**: String
     - **Permisos:** *Ninguno*
     - **Descripción:** Información más relevante del producto
-- **applications:**
+- **apps:**
     - **Tipo**: Object
     - **Permisos:** *Lectura de aplicaciones*
     - **Descripción:** Lista de compatibilidad de vehículos con estructura de árbol
+- **picture_url:**
+    - **Tipo**: String
+    - **Permisos:** *Ningunno*
+    - **Descripción:** URL de la foto principal del producto alojada en el servidor
 - **price_00:**
     - **Tipo**: Object
     - **Permisos:** *Lectura de precios, cuenta de telemarketing*
@@ -177,7 +181,6 @@ return $response->json();
         - *value:* precio del producto
         - *prefix:* símbolo de moneda
         - *sufix:* código ISO de moneda
-        - *factor:* factor de conversión referente a la moneda local
 - **price_01:**
     - **Tipo**: Object
     - **Permisos:** *Lectura de precios*
@@ -186,7 +189,6 @@ return $response->json();
         - *value:* precio del producto
         - *prefix:* símbolo de moneda
         - *sufix:* código ISO de moneda
-        - *factor:* factor de conversión referente a la moneda local
 - **stock:**
     - **Tipo**: Array
     - **Permisos:** *Lectura de existencias, Sucursales habilitadas*
@@ -234,7 +236,7 @@ return $response->json();
 ```json
 {
   "code": "RT-510056",
-  "applications": {
+  "apps": {
     "FORD": {
       "FIESTA": [
         {
@@ -270,14 +272,12 @@ return $response->json();
   "price_00": {
     "value": 12.34,
     "prefix": "$",
-    "sufix": "MXN",
-    "factor": 1
+    "sufix": "MXN"
   },
   "price_01": {
     "value": 12.34,
     "prefix": "$",
-    "sufix": "MXN",
-    "factor": 1
+    "sufix": "MXN"
   },
   "stock": [
     {
@@ -392,14 +392,12 @@ return $response->json();
             "price_00": {
                 "value": 889.85,
                 "prefix": "$",
-                "sufix": "MXN",
-                "factor": 1
+                "sufix": "MXN"
             },
             "price_01": {
                 "value": 889.85,
                 "prefix": "$",
-                "sufix": "MXN",
-                "factor": 1
+                "sufix": "MXN"
             },
             "stock": [
                 {
@@ -481,7 +479,7 @@ return $response->json();
     - **Permisos:** *Ninguno*
     - **Descripción:** Lista de productos que coinciden con los parámetros enviados,
     - **Contenido por item:**
-      - Incluye la estructura de producto vista [anteriormente](#producto), con la diferencia de que no incluye aplicaciones, equivalencias y propiedades de producto.
+      - Incluye la misma estructura de [**producto**](#producto), con la diferencia de que no incluye aplicaciones, equivalencias y propiedades de producto.
 
 ```json
 {
@@ -493,14 +491,12 @@ return $response->json();
             "price_00": {
                 "value": 326.94,
                 "prefix": "$",
-                "sufix": "MXN",
-                "factor": 1
+                "sufix": "MXN"
             },
             "price_01": {
                 "value": 326.94,
                 "prefix": "$",
-                "sufix": "MXN",
-                "factor": 1
+                "sufix": "MXN"
             },
             "stock": [
                 {
